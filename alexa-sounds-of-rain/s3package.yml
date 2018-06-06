@@ -1,0 +1,10 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  alexaSoundsOfRainS3Package:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: alexa-sounds-of-rain-package
+  alexaSoundsOfRainS3Music:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: alexa-sounds-of-rain-music

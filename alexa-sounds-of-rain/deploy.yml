@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  LambdaFunctionVersion:
+    Type: String
+
+Resources:
+  serverlessFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: alexa-sounds-of-rain
+      CodeUri: src/handlers
+      Handler: index.handler
+      Runtime: nodejs6.10
+      Events:
+        AlexaSkillEvent:
+          Type: AlexaSkill
+      Environment:
+        Variables:
+          TZ: 'Asia/Tokyo'
+          Version: 
+            Ref: LambdaFunctionVersion
