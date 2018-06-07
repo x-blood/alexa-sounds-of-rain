@@ -11,6 +11,10 @@ aws cloudformation package \
 aws cloudformation deploy \
   --template-file deploy-output.yml \
   --stack-name alexa-sounds-of-rain-sam \
-  --parameter-overrides LambdaFunctionVersion=0.01 \
+  --parameter-overrides \
+  LambdaFunctionVersion=1.00 \
+  SoundFileBaseUrl=${ALEXA_SOUNDS_OF_RAIN_SOUND_FILE_BASE_URL} \
+  SoundFileBaseName=${ALEXA_SOUNDS_OF_RAIN_SOUND_FILE_BASE_NAME} \
+  AppId=${ALEXA_SOUNDS_OF_RAIN_APP_ID} \
   --capabilities CAPABILITY_IAM \
   --profile handson20180323

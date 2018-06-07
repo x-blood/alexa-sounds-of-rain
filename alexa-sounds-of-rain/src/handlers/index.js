@@ -1,18 +1,18 @@
 'use strict';
 var Alexa = require('alexa-sdk');
-var APP_ID = undefined;
 
-var HELP_MESSAGE = "テスト中です。ヘルプメッセージ";
-var HELP_REPROMPT = "どうしますか？";
-var STOP_MESSAGE = "さようなら";
+var HELP_MESSAGE = "雨音を再生して、や、雨音を流して、などの発音で、雨音を再生します。現在のバージョンは、" + process.env.Version + "です。";
+var STOP_MESSAGE = "<say-as interpret-as=\"interjection\">バイバイ</say-as>";
+var UNHANDLED_MESSAGE = "<say-as interpret-as=\"interjection\">ありゃ</say-as>";
 
 exports.handler = function(event, context, callback) {
-    console.log('start handler');
+    console.log('[DEBUG]start handler');
     var alexa = Alexa.handler(event, context);
-    // alexa.APP_ID = APP_ID;
+    console.log('[DEBUG]AppId : ' + process.env.AppId);
+    alexa.appId = process.env.AppId;
     alexa.registerHandlers(handlers);
     alexa.execute();
-    console.log('end handler')
+    console.log('[DEBUG]end handler')
 };
 
 var handlers = {
@@ -20,17 +20,21 @@ var handlers = {
         this.emit('SoundsOfRainIntent');
     },
     'SoundsOfRainIntent': function () {
+
+        var soundFileBaseUrl = process.env.SoundFileBaseUrl;
+        console.log('[DEBUG]soundFileBaseUrl : ' + soundFileBaseUrl);
+        var soundFileBaseFileName = process.env.SoundFileBaseName;
+        console.log('[DEBUG]soundFileBaseFileName : ' + soundFileBaseFileName);
+
         console.log('Start SoundsOfRainIntent');
-        let speechOut = '雨の音を再生します。';
-        speechOut += "<audio src='' />";
+        let speechOut = '<say-as interpret-as="interjection">んじゃ</say-as>、雨音を再生します。';
+        speechOut += "<audio src='" + soundFileBaseUrl + soundFileBaseFileName + "-001.mp3' />";
         this.emit(':tell', speechOut);
-        // this.emit(':tell', 'aiueo');
         console.log('End SoundsOfRainIntent');
     },
     'AMAZON.HelpIntent': function () {
         var speechOutput = HELP_MESSAGE;
-        var reprompt = HELP_REPROMPT;
-        this.emit(':ask', speechOutput, reprompt);
+        this.emit(':ask', speechOutput);
     },
     'AMAZON.CancelIntent': function () {
         this.emit(':tell', STOP_MESSAGE);
@@ -39,6 +43,6 @@ var handlers = {
         this.emit(':tell', STOP_MESSAGE);
     },
     'Unhandled': function () {
-        this.emit(':tell', 'こんにちは');
+        this.emit(':tell', UNHANDLED_MESSAGE);
     }
 };

@@ -3,6 +3,12 @@ Transform: AWS::Serverless-2016-10-31
 Parameters:
   LambdaFunctionVersion:
     Type: String
+  SoundFileBaseUrl:
+    Type: String
+  SoundFileBaseName:
+    Type: String
+  AppId:
+    Type: String
 
 Resources:
   serverlessFunction:
@@ -20,3 +26,9 @@ Resources:
           TZ: 'Asia/Tokyo'
           Version: 
             Ref: LambdaFunctionVersion
+          SoundFileBaseUrl:
+            Ref: SoundFileBaseUrl
+          SoundFileBaseName:
+            Ref: SoundFileBaseName
+          AppId:
+            Ref: AppId
