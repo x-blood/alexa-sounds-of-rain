@@ -5,7 +5,7 @@ aws cloudformation package \
   --template-file deploy.yml \
   --output-template-file deploy-output.yml \
   --s3-bucket alexa-sounds-of-rain-package \
-  --profile handson20180323
+  --profile xblood
 
 # Deploy
 aws cloudformation deploy \
@@ -17,4 +17,4 @@ aws cloudformation deploy \
   SoundFileBaseName=${ALEXA_SOUNDS_OF_RAIN_SOUND_FILE_BASE_NAME} \
   AppId=${ALEXA_SOUNDS_OF_RAIN_APP_ID} \
   --capabilities CAPABILITY_IAM \
-  --profile handson20180323
+  --profile xblood

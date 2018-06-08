@@ -16,24 +16,24 @@
 # 検証実行
 aws cloudformation validate-template \
   --template-body file://s3package.yml \
-  --profile handson20180323
+  --profile xblood
 
 # スタックの作成
 aws cloudformation create-stack \
   --stack-name alexa-sounds-of-rain-s3-buckets \
   --template-body file://s3package.yml \
-  --profile handson20180323
+  --profile xblood
 
 # スタックの更新
 aws cloudformation update-stack \
   --stack-name alexa-sounds-of-rain-s3-buckets \
   --template-body file://s3package.yml \
-  --profile handson20180323
+  --profile xblood
 
 # スタックの削除
 aws cloudformation delete-stack \
   --stack-name alexa-sounds-of-rain-s3-buckets \
-  --profile handson20180323
+  --profile xblood
 ```
 ## デプロイコマンド
 内容はデプロイシェル参照のこと
