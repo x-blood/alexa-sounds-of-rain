@@ -1,18 +1,18 @@
 'use strict';
 var Alexa = require('alexa-sdk');
 
-var HELP_MESSAGE = "雨音を再生して、や、雨音を流して、などの発音で、雨音を再生します。現在のバージョンは、" + process.env.Version + "です。";
+var HELP_MESSAGE = "さみだれを起動して、と発音すると、雨音が流れます。現在のバージョンは、" + process.env.Version + "です。";
 var STOP_MESSAGE = "<say-as interpret-as=\"interjection\">バイバイ</say-as>";
-var UNHANDLED_MESSAGE = "<say-as interpret-as=\"interjection\">ありゃ</say-as>";
+var UNHANDLED_MESSAGE = "<say-as interpret-as=\"interjection\">ありゃ</say-as>、うまくいきませんでした。";
+
+const soundFileBaseUrl = process.env.SoundFileBaseUrl;
+const soundFileBaseFileName = process.env.SoundFileBaseName;
 
 exports.handler = function(event, context, callback) {
-    console.log('start handler');
     var alexa = Alexa.handler(event, context);
-    console.log('AppId : ' + process.env.AppId);
     alexa.appId = process.env.AppId;
     alexa.registerHandlers(handlers);
     alexa.execute();
-    console.log('end handler');
 };
 
 var handlers = {
@@ -23,26 +23,15 @@ var handlers = {
     },
     'SoundsOfRainIntent': function () {
         console.log('Start SoundsOfRainIntent');
-        
-        var soundFileBaseUrl = process.env.SoundFileBaseUrl;
-        console.log('soundFileBaseUrl : ' + soundFileBaseUrl);
-        var soundFileBaseFileName = process.env.SoundFileBaseName;
-        console.log('soundFileBaseFileName : ' + soundFileBaseFileName);
 
-        let speechOut = '<say-as interpret-as="interjection">んじゃ</say-as>、雨音を再生します。';
-        speechOut += "<audio src='" + soundFileBaseUrl + soundFileBaseFileName + "-001.mp3' />";
-        // this.emit(':tell', speechOut);
-
-        // const loopMode = this.t('LOOP_ON');
-        // this.response.speak(loopMode);
-        this.attributes['loop'] = true;
-        this.response.audioPlayerPlay('REPLACE_ALL',
-            soundFileBaseUrl + soundFileBaseFileName + "-001.mp3",
-            "soundsOfRainToken", null, 0);
+        let speechOut = '<say-as interpret-as="interjection">それでは、どうぞ。</say-as>';
+        this.response.speak(speechOut).audioPlayerPlay('REPLACE_ALL',
+            soundFileBaseUrl + soundFileBaseFileName + "-002.mp3", 1, null, 0);
         this.emit(':responseReady');
 
         console.log('End SoundsOfRainIntent');
     },
+    // 標準ビルトインテント
     'AMAZON.HelpIntent': function () {
         console.log('Start HelpIntent');
         this.emit(':tell', HELP_MESSAGE);
@@ -50,15 +39,13 @@ var handlers = {
     },
     'AMAZON.CancelIntent': function () {
         console.log('Start CancelIntent');
-        // this.emit(':tell', STOP_MESSAGE);
-        this.response.audioPlayerStop();
+        this.response.speak(STOP_MESSAGE).audioPlayerStop();
         this.emit(':responseReady');
         console.log('End CancelIntent');
     },
     'AMAZON.StopIntent': function () {
         console.log('Start StopIntent');
-        // this.emit(':tell', STOP_MESSAGE);
-        this.response.audioPlayerStop();
+        this.response.speak(STOP_MESSAGE).audioPlayerStop();
         this.emit(':responseReady');
         console.log('End StopIntent');
     },
@@ -70,7 +57,10 @@ var handlers = {
     },
     'AMAZON.ResumeIntent': function () {
         console.log('Start ResumeIntent');
-        this.emit('SoundsOfRainIntent');
+        var offset = this.event.context.AudioPlayer.offsetInMilliseconds;
+        this.response.audioPlayerPlay('REPLACE_ALL',
+            soundFileBaseUrl + soundFileBaseFileName + "-002.mp3", 1, null, offset);
+        this.emit(':responseReady');
         console.log('End ResumeIntent');
     },
     'Unhandled': function () {
@@ -78,7 +68,6 @@ var handlers = {
         this.emit(':tell', UNHANDLED_MESSAGE);
         console.log('End Unhandled');
     },
-
     // 再生開始時
     'PlaybackStarted': function () {
         console.log('Start PlaybackStarted');
@@ -93,13 +82,26 @@ var handlers = {
     },
     // 再生停止時
     'PlaybackStopped': function () {
-        console.log('Start PlaybackStopped');
         this.emit(':responseReady');
         console.log('End PlaybackStopped');
     },
     // 再生終了が近い時
     'PlaybackNearlyFinished': function () {
         console.log('Start PlaybackNearlyFinished');
+
+        var previousToken = 1;
+        if (this.event.context.AudioPlayer.token) {
+            previousToken = this.event.context.AudioPlayer.token;
+            console.log('previousToken : ' + previousToken);
+        }
+        var nextToken = previousToken;
+        nextToken++;
+        console.log('nextToken : ' + nextToken);
+
+        this.response.audioPlayerPlay('ENQUEUE',
+            soundFileBaseUrl + soundFileBaseFileName + "-002.mp3",
+            nextToken, previousToken, 0);
+
         this.emit(':responseReady');
         console.log('End PlaybackNearlyFinished');
     },
