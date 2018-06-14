@@ -51,5 +51,13 @@ sh ./deploy.sh
 - [AudioPlayerの再生キューの活用](https://dev.classmethod.jp/cloud/aws/using_audio_player_queue/)
 - [Alexa SkillのAudioPlayer機能【実装編】](https://kotodama.today/?p=881)
 
-## 参考サイト - 素材系
+## 参考サイト - 音楽素材系
 - [効果音ラボ](https://soundeffect-lab.info/sound/animal/)
+
+## 参考サイト - 画像素材系
+- [photoAC](https://www.photo-ac.com/)
+- [Pixabay · 魅力的なフリー画像](https://pixabay.com/)
+
+## 参考サイト - 公式キャンペーンなど
+- [AlexaのAWSプロモーションクレジットのご紹介](https://developer.amazon.com/ja/alexa-skills-kit/alexa-aws-credits)
+- [スキル開発者への特典](https://developer.amazon.com/ja/alexa-skills-kit/alexa-developer-skill-promotion)
