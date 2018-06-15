@@ -1,8 +1,10 @@
 'use strict';
 var Alexa = require('alexa-sdk');
 
-var HELP_MESSAGE = "さみだれを起動して、と発音すると、雨音が流れます。現在のバージョンは、" + process.env.Version + "です。";
-var STOP_MESSAGE = "<say-as interpret-as=\"interjection\">バイバイ</say-as>";
+var HELP_MESSAGE = "再生して、リラックスしたい、集中したい、眠りたいなど喋りかけてみてください。雨音が流れます。<say-as interpret-as=\"interjection\">さぁ、どうぞ。</say-as>";
+// var STOP_MESSAGE = "<say-as interpret-as=\"interjection\">バイバイ</say-as>";
+var STOP_MESSAGE = "ストップしました。";
+var CANCEL_MESSAGE = "キャンセルしました。";
 var UNHANDLED_MESSAGE = "<say-as interpret-as=\"interjection\">ありゃ</say-as>、うまくいきませんでした。";
 
 const soundFileBaseUrl = process.env.SoundFileBaseUrl;
@@ -16,45 +18,52 @@ exports.handler = function(event, context, callback) {
 };
 
 var handlers = {
+    // 起動
     'LaunchRequest': function () {
         console.log('Start LaunchRequest');
-        this.emit('SoundsOfRainIntent');
+        this.emit(':ask', HELP_MESSAGE);
         console.log('End LaunchRequest');
     },
     'SoundsOfRainIntent': function () {
         console.log('Start SoundsOfRainIntent');
 
-        let speechOut = '<say-as interpret-as="interjection">それでは、どうぞ。</say-as>';
+        let speechOut = '<say-as interpret-as="interjection">お疲れ様です</say-as>';
         this.response.speak(speechOut).audioPlayerPlay('REPLACE_ALL',
             soundFileBaseUrl + soundFileBaseFileName + "-002.mp3", 1, null, 0);
         this.emit(':responseReady');
 
         console.log('End SoundsOfRainIntent');
     },
-    // 標準ビルトインテント
+    // ヘルプ
     'AMAZON.HelpIntent': function () {
         console.log('Start HelpIntent');
-        this.emit(':tell', HELP_MESSAGE);
+        this.emit(':ask', HELP_MESSAGE);
         console.log('End HelpIntent');
     },
+    // キャンセル(終了)
     'AMAZON.CancelIntent': function () {
         console.log('Start CancelIntent');
-        this.response.speak(STOP_MESSAGE).audioPlayerStop();
+        this.response.speak(CANCEL_MESSAGE);
+        this.response.audioPlayerClearQueue('CLEAR_ALL');
         this.emit(':responseReady');
         console.log('End CancelIntent');
     },
+    // ストップ(終了)
     'AMAZON.StopIntent': function () {
         console.log('Start StopIntent');
-        this.response.speak(STOP_MESSAGE).audioPlayerStop();
+        this.response.speak(STOP_MESSAGE);
+        this.response.audioPlayerClearQueue('CLEAR_ALL');
         this.emit(':responseReady');
         console.log('End StopIntent');
     },
+    // 一時停止
     'AMAZON.PauseIntent': function () {
         console.log('Start PauseIntent');
         this.response.audioPlayerStop();
         this.emit(':responseReady');
         console.log('End PauseIntent');
     },
+    // 再開
     'AMAZON.ResumeIntent': function () {
         console.log('Start ResumeIntent');
         var offset = this.event.context.AudioPlayer.offsetInMilliseconds;
