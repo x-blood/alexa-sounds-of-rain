@@ -24,7 +24,7 @@ Resources:
       Environment:
         Variables:
           TZ: 'Asia/Tokyo'
-          Version: 
+          Version:
             Ref: LambdaFunctionVersion
           SoundFileBaseUrl:
             Ref: SoundFileBaseUrl
