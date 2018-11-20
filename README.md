@@ -6,10 +6,19 @@
 ※exportsコマンドなどを用いてデプロイシェルから値を取得できるようにしておくこと。
 
 | 項目名 | 説明 |
-----|---- 
+----|----
 | ALEXA_SOUNDS_OF_RAIN_SOUND_FILE_BASE_URL | サウンドファイルが保存されているURL |
 | ALEXA_SOUNDS_OF_RAIN_SOUND_FILE_BASE_NAME | サウンドファイルの連番を付与する前の基本名。 |
 | ALEXA_SOUNDS_OF_RAIN_APP_ID | スキルID |
+
+## エイリアスの定義
+| エイリアス名 | バージョン名 | 説明 |
+---- | ---- | ----
+| (非修飾) | $LATEST | Production environment |
+
+### 経緯
+初回リリース時にエイリアスを指定しないLambda Endpointを利用していたため、  
+現在はProductionが非修飾になっている。
 
 ## S3バケットのスタック作成(1度きりの作業)
 ```
