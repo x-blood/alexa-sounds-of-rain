@@ -1,5 +1,33 @@
 ## セットアップ
-- [セットアップは別ドキュメント参照のこと](../alexa-reservation-room/README.md)
+### node.jsのセットアップ(Linux)
+```
+# nvmのインストール
+git clone https://github.com/creationix/nvm.git ~/.nvm
+source ~/.nvm/nvm.sh
+
+# nvmのバージョン確認
+nvm --version
+
+# Node.jsのインストール
+nvm install 6.14.1
+
+# Node.jsのバージョン確認
+node -v
+```
+
+### 推奨：nvmの設定(Linux)
+```
+# デフォルトのNode.jsのバージョン指定
+nvm alias default v6.14.1
+
+# ターミナル起動時の指定
+vi ~/.bashrc
+
+# 下記情報を入力
+if [[ -s ~/.nvm/nvm.sh ]];
+ then source ~/.nvm/nvm.sh
+fi
+```
 
 ## 使用する環境変数
 事前に下記の環境変数が定義されていること。  
