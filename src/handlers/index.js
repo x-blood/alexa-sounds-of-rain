@@ -1,11 +1,10 @@
 'use strict';
-var Alexa = require('alexa-sdk');
+const Alexa = require('ask-sdk');
 
-var HELP_MESSAGE = "再生して、リラックスしたい、集中したい、眠りたいなど喋りかけてみてください。雨音が流れます。<say-as interpret-as=\"interjection\">さぁ、どうぞ。</say-as>";
-// var STOP_MESSAGE = "<say-as interpret-as=\"interjection\">バイバイ</say-as>";
-var STOP_MESSAGE = "ストップしました。";
-var CANCEL_MESSAGE = "キャンセルしました。";
-var UNHANDLED_MESSAGE = "<say-as interpret-as=\"interjection\">ありゃ</say-as>、うまくいきませんでした。";
+const HELP_MESSAGE = "再生して、リラックスしたい、集中したい、眠りたいなど喋りかけてみてください。雨音が流れます。<say-as interpret-as=\"interjection\">さぁ、どうぞ。</say-as>";
+const STOP_MESSAGE = "ストップしました。";
+const CANCEL_MESSAGE = "キャンセルしました。";
+const UNHANDLED_MESSAGE = "<say-as interpret-as=\"interjection\">ありゃ</say-as>、うまくいきませんでした。";
 
 const soundFileBaseUrl = process.env.SoundFileBaseUrl;
 const soundFileBaseFileName = process.env.SoundFileBaseName;
@@ -15,6 +14,38 @@ exports.handler = function(event, context, callback) {
     alexa.appId = process.env.AppId;
     alexa.registerHandlers(handlers);
     alexa.execute();
+};
+
+const LaunchRequestHandler = {
+    canHandle(handleInput) {
+        return handleInput.requestEnvelope.request.type === 'LaunchRequest';
+    },
+    handle(handleInput) {
+        return handleInput.responseBuilder
+            .speak(HELP_MESSAGE)
+            .reprompt(HELP_MESSAGE)
+            .getResponse();
+    }
+};
+
+const SoundsOfRainIntentHandler = {
+    canHandle(handleInput) {
+        return handleInput.requestEnvelope.request.type == 'IntentRequest'
+            && handleInput.requestEnvelope.intent.name === 'SoundsOfRainIntent';
+    },
+    handle(handleInput) {
+        let speechOut = '<say-as interpret-as="interjection">お疲れ様です</say-as>';
+        return handleInput.responseBuilder
+            .speak(speechOut)
+            .addAudioPlayerPlayDirective(
+                'REPLACE_ALL', // playBehavior
+                soundFileBaseUrl + soundFileBaseFileName + "-002.mp3", // url
+                1, // token
+                0, // offsetInMilliseconds
+                null // expectedPreviousToken
+            )
+            .getResponse();
+    }
 };
 
 var handlers = {

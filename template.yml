@@ -9,6 +9,12 @@ Parameters:
     Type: String
   AppId:
     Type: String
+  Stage:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
 
 Resources:
   serverlessFunction:
