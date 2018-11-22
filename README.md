@@ -1,5 +1,5 @@
 ## セットアップ
-### node.jsのセットアップ(Linux)
+### node.jsのセットアップ(Linux & Mac)
 ```
 # nvmのインストール
 git clone https://github.com/creationix/nvm.git ~/.nvm
@@ -15,13 +15,16 @@ nvm install 6.14.1
 node -v
 ```
 
-### 推奨：nvmの設定(Linux)
+### 推奨：nvmの設定(Linux & Mac)
 ```
 # デフォルトのNode.jsのバージョン指定
 nvm alias default v6.14.1
 
 # ターミナル起動時の指定
+## Linuxの場合
 vi ~/.bashrc
+## Macの場合
+vi ~/.bash_profile
 
 # 下記情報を入力
 if [[ -s ~/.nvm/nvm.sh ]];
