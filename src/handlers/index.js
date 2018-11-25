@@ -129,12 +129,12 @@ const PlaybackNearlyFinishedHandler = {
 };
 
 const PauseIntentHandler = {
-    console.log('Start PauseIntent');
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
             && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.PauseIntent';
     },
     handle(handlerInput) {
+        console.log('Start PauseIntent');
         return handlerInput.responseBuilder
             .getResponse();
     },
@@ -271,8 +271,8 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 exports.handler = skillBuilder
   .addRequestHandlers(
     LaunchRequestHandler,
-    SoundsOfRainIntentHandler,
     HelpIntentHandler,
+    SoundsOfRainIntentHandler,
     CancelAndStopIntentHandler,
     SessionEndedRequestHandler,
     PlaybackNearlyFinishedHandler,

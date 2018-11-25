@@ -1,8 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Parameters:
-  LambdaFunctionVersion:
-    Type: String
   SoundFileBaseUrl:
     Type: String
   SoundFileBaseName:
@@ -22,6 +20,8 @@ Resources:
     Properties:
       FunctionName: alexa-sounds-of-rain
       CodeUri: src/handlers
+      AutoPublishAlias:
+        Ref: Stage
       Handler: index.handler
       Runtime: nodejs6.10
       Events:
@@ -30,8 +30,6 @@ Resources:
       Environment:
         Variables:
           TZ: 'Asia/Tokyo'
-          Version:
-            Ref: LambdaFunctionVersion
           SoundFileBaseUrl:
             Ref: SoundFileBaseUrl
           SoundFileBaseName:
