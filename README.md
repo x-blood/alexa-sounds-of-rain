@@ -39,6 +39,20 @@ cd src/handlers
 npm install --save ask-sdk
 ```
 
+## テストに必要な外部ライブラリのインストール
+```
+cd src/handlers/tests/unit
+npm install -g chai
+```
+
+## AWS SAM CLIのインストール
+- [SAM CLIのインストール](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/sam-cli-requirements.html)
+
+## SAM LOCALによるローカル環境での動作確認方法
+```
+sam local invoke "serverlessFunction" --event "./test/event/SoundsOfRainIntent.json"
+```
+
 ## 使用する環境変数
 事前に下記の環境変数が定義されていること。  
 ※exportsコマンドなどを用いてデプロイシェルから値を取得できるようにしておくこと。

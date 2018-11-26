@@ -8,6 +8,7 @@ const UNHANDLED_MESSAGE = "<say-as interpret-as=\"interjection\">ありゃ</say-
 
 const soundFileBaseUrl = process.env.SoundFileBaseUrl;
 const soundFileBaseFileName = process.env.SoundFileBaseName;
+const stage = process.env.Stage;
 
 // exports.handler = function(event, context, callback) {
 //     var alexa = Alexa.handler(event, context);
@@ -17,12 +18,12 @@ const soundFileBaseFileName = process.env.SoundFileBaseName;
 // };
 
 const LaunchRequestHandler = {
-    canHandle(handleInput) {
-        return handleInput.requestEnvelope.request.type === 'LaunchRequest';
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
-    handle(handleInput) {
+    handle(handlerInput) {
         console.log('Start LaunchRequest');
-        return handleInput.responseBuilder
+        return handlerInput.responseBuilder
             .speak(HELP_MESSAGE)
             .reprompt(HELP_MESSAGE)
             .getResponse();
@@ -44,14 +45,17 @@ const HelpIntentHandler = {
 };
 
 const SoundsOfRainIntentHandler = {
-    canHandle(handleInput) {
-        return handleInput.requestEnvelope.request.type == 'IntentRequest'
-            && handleInput.requestEnvelope.intent.name === 'SoundsOfRainIntent';
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+            && handlerInput.requestEnvelope.request.intent.name === 'SoundsOfRainIntent';
     },
-    handle(handleInput) {
+    handle(handlerInput) {
         console.log('Start SoundsOfRainIntent');
         let speechOut = '<say-as interpret-as="interjection">お疲れ様です</say-as>';
-        return handleInput.responseBuilder
+        if (stage === 'dev') {
+            speechOut = '<say-as interpret-as="interjection">開発、お疲れ様です。</say-as>';
+        }
+        return handlerInput.responseBuilder
             .speak(speechOut)
             .addAudioPlayerPlayDirective(
                 'REPLACE_ALL', // playBehavior

@@ -24,6 +24,7 @@ Resources:
         Ref: Stage
       Handler: index.handler
       Runtime: nodejs6.10
+      Timeout: 60
       Events:
         AlexaSkillEvent:
           Type: AlexaSkill
@@ -36,3 +37,5 @@ Resources:
             Ref: SoundFileBaseName
           AppId:
             Ref: AppId
+          Stage:
+            Ref: Stage
