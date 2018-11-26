@@ -40,9 +40,18 @@ npm install --save ask-sdk
 ```
 
 ## テストに必要な外部ライブラリのインストール
+- [Alexa Skill Test Framework](https://github.com/BrianMacIntosh/alexa-skill-test-framework)を利用する。
+- Reference: [Unit Testing: Creating Functional Alexa Skills](https://developer.amazon.com/ja/blogs/alexa/post/35bdad3d-57c8-4623-88c6-815540697af5/unit-testing-create-functional-alexa-skills)  
 ```
-cd src/handlers/tests/unit
 npm install -g chai
+npm install -g mocha
+cd test
+npm install alexa-skill-test-framework --save-dev .
+```
+
+## ローカルテスト実行コマンド
+```
+mocha test/alexa-sounds-of-rain-tests.js
 ```
 
 ## AWS SAM CLIのインストール
@@ -51,6 +60,24 @@ npm install -g chai
 ## SAM LOCALによるローカル環境での動作確認方法
 ```
 sam local invoke "serverlessFunction" --event "./test/event/SoundsOfRainIntent.json"
+```
+
+## ASK CLIのインストール
+- [ステップ2：ASK CLIのインストールと初期化](https://developer.amazon.com/ja/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html#step-2-install-and-initialize-ask-cli)
+```
+# Version確認
+ask -v
+```
+
+## ASK CLIによるシミュレート
+- [[Alexa] 遂にでた！ Alexa Skill Kit のCLIでデプロイまでやってみた](https://dev.classmethod.jp/cloud/ask-cli/)
+```
+# 初期化(※profileはxbloodを指定←awsとはまた別)
+ask init
+# シミュレートの実行(LaunchRequest)
+ask simulate --text "さみだれのおとを開いて" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID} --profile xblood
+# シミュレートの実行(SoundOfRainIntent)
+ask simulate --text "リラックスしたい" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID} --profile xblood
 ```
 
 ## 使用する環境変数

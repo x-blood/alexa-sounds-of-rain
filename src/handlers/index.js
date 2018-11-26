@@ -1,7 +1,7 @@
 'use strict';
 const Alexa = require('ask-sdk');
 
-const HELP_MESSAGE = "再生して、リラックスしたい、集中したい、眠りたいなど喋りかけてみてください。雨音が流れます。<say-as interpret-as=\"interjection\">さぁ、どうぞ。</say-as>";
+const HELP_MESSAGE = "再生して、リラックスしたい、集中したい、眠りたいなど喋りかけてみてください。雨音が流れます。<say-as interpret-as=\"interjection\">さぁ、どうぞ？</say-as>";
 const STOP_MESSAGE = "ストップしました。";
 const CANCEL_MESSAGE = "キャンセルしました。";
 const UNHANDLED_MESSAGE = "<say-as interpret-as=\"interjection\">ありゃ</say-as>、うまくいきませんでした。";
