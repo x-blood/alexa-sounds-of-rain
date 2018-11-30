@@ -18,3 +18,9 @@ aws cloudformation deploy \
   Stage=${ALEXA_SOUNDS_OF_RAIN_STAGE} \
   --capabilities CAPABILITY_IAM \
   --profile xblood
+
+# Set Stack Policy
+aws cloudformation set-stack-policy \
+  --stack-name alexa-sounds-of-rain-sam \
+  --stack-policy-body=file://./template-stack-policy.json \
+  --profile xblood

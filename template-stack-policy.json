@@ -1,0 +1,10 @@
+{
+    "Statement" : [
+      {
+        "Effect" : "Deny",
+        "Action" : "Update:Delete",
+        "Principal" : "*",
+        "Resource" : "LogicalResourceId/serverlessFunction"
+      }
+    ]
+  }
