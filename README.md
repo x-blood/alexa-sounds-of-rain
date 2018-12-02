@@ -153,3 +153,8 @@ sh ./deploy.sh
 - [Alexa-SDK Ver2（その8) AudioPlayer](https://dev.classmethod.jp/cloud/alexa-sdk-v2-eighth/)
 - [(古いバージョンの奴)Alexa Skills Kit SDK for Node.js ざっくり訳](https://qiita.com/HeRo/items/8475505a55cc9e737687)
 
+## 参考サイト - GitHub
+- [audio-stream-starter-alexa](https://github.com/skilltemplates/audio-stream-starter-alexa/blob/ef56a806c70d3983ce6c106612e6daa03011b1a5/lambda/custom/index.js)
+- [skill-sample-nodejs-audio-player(TypeScript)](https://github.com/alexa/skill-sample-nodejs-audio-player/blob/mainline/single-stream/lambda/src/IntentHandlers.ts)
+- [skill-sample-nodejs-audio-player(JS)](https://github.com/alexa/skill-sample-nodejs-audio-player/blob/mainline/multiple-streams/lambda/src/index.js)
+
