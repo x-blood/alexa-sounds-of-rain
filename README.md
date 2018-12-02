@@ -72,11 +72,11 @@ ask -v
 ## ASK CLIによるシミュレート
 - [[Alexa] 遂にでた！ Alexa Skill Kit のCLIでデプロイまでやってみた](https://dev.classmethod.jp/cloud/ask-cli/)
 ```
-# 初期化(※profileはxbloodを指定←awsとはまた別)
+#初期化(※profileはxbloodを指定←awsとはまた別)
 ask init
-# シミュレートの実行(LaunchRequest)
+#シミュレートの実行(LaunchRequest)
 ask simulate --text "さみだれのおとを開いて" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID} --profile xblood
-# シミュレートの実行(SoundOfRainIntent)
+#シミュレートの実行(SoundOfRainIntent)
 ask simulate --text "リラックスしたい" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID} --profile xblood
 ```
 
