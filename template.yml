@@ -1,14 +1,18 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Parameters:
-  LambdaFunctionVersion:
-    Type: String
   SoundFileBaseUrl:
     Type: String
   SoundFileBaseName:
     Type: String
   AppId:
     Type: String
+  Stage:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
 
 Resources:
   serverlessFunction:
@@ -16,19 +20,22 @@ Resources:
     Properties:
       FunctionName: alexa-sounds-of-rain
       CodeUri: src/handlers
+      AutoPublishAlias:
+        Ref: Stage
       Handler: index.handler
       Runtime: nodejs6.10
+      Timeout: 60
       Events:
         AlexaSkillEvent:
           Type: AlexaSkill
       Environment:
         Variables:
           TZ: 'Asia/Tokyo'
-          Version:
-            Ref: LambdaFunctionVersion
           SoundFileBaseUrl:
             Ref: SoundFileBaseUrl
           SoundFileBaseName:
             Ref: SoundFileBaseName
           AppId:
             Ref: AppId
+          Stage:
+            Ref: Stage
