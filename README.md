@@ -1,4 +1,4 @@
-# alexa-sounds-of-rain
+# [alexa-sounds-of-rain](https://github.com/x-blood/alexa-sounds-of-rain)
 [五月雨(さみだれ)の音](https://www.amazon.co.jp/dp/B07DVVJ8KC)  
 
 ## セットアップ
@@ -98,7 +98,8 @@ ask simulate --text "リラックスしたい" --locale ja-JP --skill-id ${ALEXA
 | エイリアス名 | バージョン名 | 説明 |
 ---- | ---- | ----
 | prod | (手動による指定) | Production environment |
-リリースするスキルのエンドポイントはエイリアス名を指定すること
+
+リリース(公開・再公開)する時のエンドポイントはエイリアスを指定すること
 
 ## S3バケットのスタック作成(1度きりの作業)
 ```
@@ -129,3 +130,6 @@ aws cloudformation delete-stack \
 ```
 sh ./deploy.sh
 ```
+
+## 参考サイト
+- [参考サイト一覧](./docs/reference.md)
