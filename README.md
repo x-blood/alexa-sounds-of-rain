@@ -1,3 +1,6 @@
+# alexa-sounds-of-rain
+[五月雨(さみだれ)の音](https://www.amazon.co.jp/dp/B07DVVJ8KC)  
+
 ## セットアップ
 ### node.jsのセットアップ(Linux & Mac)
 ```
@@ -91,11 +94,11 @@ ask simulate --text "リラックスしたい" --locale ja-JP --skill-id ${ALEXA
 | ALEXA_SOUNDS_OF_RAIN_APP_ID | スキルID |
 | ALEXA_SOUNDS_OF_RAIN_STAGE | デプロイ対象の指定。"dev" or "prod" |
 
-## エイリアスの定義
+## エイリアス
 | エイリアス名 | バージョン名 | 説明 |
 ---- | ---- | ----
-| prod | (auto increment) | Production environment |
-| dev | (auto increment) | Develop environment |
+| prod | (手動による指定) | Production environment |
+リリースするスキルのエンドポイントはエイリアス名を指定すること
 
 ## S3バケットのスタック作成(1度きりの作業)
 ```
@@ -121,40 +124,8 @@ aws cloudformation delete-stack \
   --stack-name alexa-sounds-of-rain-s3-buckets \
   --profile xblood
 ```
-## デプロイコマンド
+## デプロイ
 内容はデプロイシェル参照のこと
 ```
 sh ./deploy.sh
 ```
-
-## 参考サイト - 旧SDK(1系)
-- [Alexaでハリーポッターの呪文を唱えるスキルを作った](http://atskimura.hatenablog.com/entry/2018/01/08/222701)
-- [Alexa Skills Kit for Node.js (alexa-sdk) で音楽ファイルを鳴らす](https://qiita.com/alpha2048/items/aa30bfef89f3b8eaf029)
-- [Amazon Alexaで自然な発話をする方法](https://qiita.com/tochi/items/0ddf63953ccd98ac315c)
-- [AWS公式 一般的標準インテント](https://developer.amazon.com/ja/docs/custom-skills/standard-built-in-intents.html)
-- [AWS公式 Speechconリファレンス（感嘆詞）: 日本語](https://developer.amazon.com/ja/docs/custom-skills/speechcon-reference-interjections-japanese.html)
-- [AudioPlayerでハローワールド](https://dev.classmethod.jp/cloud/aws/hello-world-alexa-skill-audioplayer/)
-- [AudioPlayerの再生キューの活用](https://dev.classmethod.jp/cloud/aws/using_audio_player_queue/)
-- [Alexa SkillのAudioPlayer機能【実装編】](https://kotodama.today/?p=881)
-
-## 参考サイト - 音楽素材系
-- [効果音ラボ](https://soundeffect-lab.info/sound/animal/)
-
-## 参考サイト - 画像素材系
-- [photoAC](https://www.photo-ac.com/)
-- [Pixabay · 魅力的なフリー画像](https://pixabay.com/)
-
-## 参考サイト - 公式キャンペーンなど
-- [AlexaのAWSプロモーションクレジットのご紹介](https://developer.amazon.com/ja/alexa-skills-kit/alexa-aws-credits)
-- [スキル開発者への特典](https://developer.amazon.com/ja/alexa-skills-kit/alexa-developer-skill-promotion)
-
-## 参考サイト - ASK SDK for Node.js 2
-- [利用可能なメソッド](https://ask-sdk-for-nodejs.readthedocs.io/ja/latest/Building-Response.html)
-- [Alexa-SDK Ver2（その8) AudioPlayer](https://dev.classmethod.jp/cloud/alexa-sdk-v2-eighth/)
-- [(古いバージョンの奴)Alexa Skills Kit SDK for Node.js ざっくり訳](https://qiita.com/HeRo/items/8475505a55cc9e737687)
-
-## 参考サイト - GitHub
-- [audio-stream-starter-alexa](https://github.com/skilltemplates/audio-stream-starter-alexa/blob/ef56a806c70d3983ce6c106612e6daa03011b1a5/lambda/custom/index.js)
-- [skill-sample-nodejs-audio-player(TypeScript)](https://github.com/alexa/skill-sample-nodejs-audio-player/blob/mainline/single-stream/lambda/src/IntentHandlers.ts)
-- [skill-sample-nodejs-audio-player(JS)](https://github.com/alexa/skill-sample-nodejs-audio-player/blob/mainline/multiple-streams/lambda/src/index.js)
-
