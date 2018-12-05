@@ -1,4 +1,4 @@
-# alexa-sounds-of-rain
+# [alexa-sounds-of-rain](https://github.com/x-blood/alexa-sounds-of-rain)
 [五月雨(さみだれ)の音](https://www.amazon.co.jp/dp/B07DVVJ8KC)  
 
 ## セットアップ
