@@ -1,0 +1,15 @@
+{
+  "name": "alexa-sounds-of-rain-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "alexa-sounds-of-rain-tests.js",
+  "dependencies": {
+    "alexa-skill-test-framework": "^1.2.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xblood",
+  "license": "ISC"
+}
