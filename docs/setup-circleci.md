@@ -21,5 +21,5 @@ circleci config validate
 
 ## localでの動作確認
 ```
-circleci config validate
+circleci local execute
 ```
