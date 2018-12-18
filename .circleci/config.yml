@@ -3,6 +3,34 @@ jobs:
   build:
     docker:
       - image: circleci/node:6.14.1
+    working_directory: ~/repo
     steps:
       - checkout
-      - run: echo "hello world"
+      - restore_cache:
+            key: projectname-{{ .Branch }}
+            paths:
+            - ./src/handlers/node_modules
+            - ./test/node_modules
+      - run:
+          name: install chai@4.2.0
+          command: sudo npm install -g chai
+      - run:
+          name: install mocha@5.2.0
+          command: sudo npm install -g mocha
+      - run:
+          name: npm install src/handlers
+          command: npm install
+          working_directory: src/handlers
+      - run:
+          name: npm install test
+          command: npm install
+          working_directory: test
+      - save_cache:
+          key: projectname-{{ .Branch }}
+          paths:
+            - ./src/handlers/node_modules
+            - ./test/node_modules
+      - run:
+          name: npm test
+          command: npm test
+          working_directory: src/handlers

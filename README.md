@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/x-blood/alexa-sounds-of-rain.svg?style=svg)](https://circleci.com/gh/x-blood/alexa-sounds-of-rain)
+
 # [alexa-sounds-of-rain](https://github.com/x-blood/alexa-sounds-of-rain)
 [五月雨(さみだれ)の音](https://www.amazon.co.jp/dp/B07DVVJ8KC)  
 
@@ -38,8 +40,8 @@ fi
 ## 必要な外部ライブラリのインストール
 ```
 cd src/handlers
-# alexa-sdk
-npm install --save ask-sdk
+# 内容はpackage.json参照のこと
+npm install
 ```
 
 ## テストに必要な外部ライブラリのインストール
@@ -49,7 +51,7 @@ npm install --save ask-sdk
 npm install -g chai
 npm install -g mocha
 cd test
-npm install alexa-skill-test-framework --save-dev .
+npm install
 ```
 
 ## ローカルテスト実行コマンド
