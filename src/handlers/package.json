@@ -1,0 +1,23 @@
+{
+  "name": "alexa-sounds-of-rain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "ask-sdk": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha ../../test/alexa-sounds-of-rain-tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x-blood/alexa-sounds-of-rain.git"
+  },
+  "author": "xblood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/x-blood/alexa-sounds-of-rain/issues"
+  },
+  "homepage": "https://github.com/x-blood/alexa-sounds-of-rain#readme"
+}
