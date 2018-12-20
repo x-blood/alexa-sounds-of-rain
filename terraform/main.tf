@@ -36,6 +36,11 @@ resource "aws_s3_bucket" "alexa-sounds-of-rain-cloudfront" {
 POLICY
 }
 
+resource "aws_s3_bucket" "alexa-sounds-of-rain-cloudfront-logs" {
+  bucket = "alexa-sounds-of-rain-cloudfront-logs"
+  acl    = "private"
+}
+
 resource "aws_cloudfront_origin_access_identity" "alexa-sounds-of-rain-cf-origin-access-identity" {
   comment = "for alexa-sounds-of-rain"
 }
@@ -51,6 +56,10 @@ resource "aws_cloudfront_distribution" "alexa-sounds-of-rain-cloudfront-distribu
   }
 
   enabled             = true
+
+  logging_config {
+    bucket          = "alexa-sounds-of-rain-cloudfront-logs.s3.amazonaws.com"
+  }
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
