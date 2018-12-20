@@ -3,3 +3,4 @@ src/handlers/package-lock.json
 src/handlers/tests/unit/node_modules/
 test/node_modules/
 *-output.yml
+terraform/.terraform/
