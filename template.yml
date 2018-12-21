@@ -20,14 +20,9 @@ Resources:
     Properties:
       FunctionName: alexa-sounds-of-rain
       CodeUri: src/handlers
-      AutoPublishAlias:
-        Ref: Stage
       Handler: index.handler
       Runtime: nodejs6.10
       Timeout: 60
-      Events:
-        AlexaSkillEvent:
-          Type: AlexaSkill
       Environment:
         Variables:
           TZ: 'Asia/Tokyo'
