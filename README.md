@@ -1,7 +1,4 @@
-| Branch Name | Status |
-----|----
-| develop | [![CircleCI](https://circleci.com/gh/x-blood/alexa-sounds-of-rain/tree/develop.svg?style=svg)](https://circleci.com/gh/x-blood/alexa-sounds-of-rain/tree/develop) |
-| master | [![CircleCI](https://circleci.com/gh/x-blood/alexa-sounds-of-rain.svg?style=svg)](https://circleci.com/gh/x-blood/alexa-sounds-of-rain) |
+[![CircleCI](https://circleci.com/gh/x-blood/alexa-sounds-of-rain.svg?style=svg)](https://circleci.com/gh/x-blood/alexa-sounds-of-rain)
 
 
 # [alexa-sounds-of-rain](https://github.com/x-blood/alexa-sounds-of-rain)
@@ -42,13 +39,13 @@ fi
 ```
 
 ## 必要な外部ライブラリのインストール
+### lambdaハンドラー
 ```
 cd src/handlers
-# 内容はpackage.json参照のこと
 npm install
 ```
 
-## テストに必要な外部ライブラリのインストール
+### テスト
 - [Alexa Skill Test Framework](https://github.com/BrianMacIntosh/alexa-skill-test-framework)を利用する。
 - Reference: [Unit Testing: Creating Functional Alexa Skills](https://developer.amazon.com/ja/blogs/alexa/post/35bdad3d-57c8-4623-88c6-815540697af5/unit-testing-create-functional-alexa-skills)  
 ```
@@ -63,28 +60,22 @@ npm install
 mocha test/alexa-sounds-of-rain-tests.js
 ```
 
-## AWS SAM CLIのインストール
-- [SAM CLIのインストール](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/sam-cli-requirements.html)
-
 ## SAM LOCALによるローカル環境での動作確認方法
+- [SAM CLIのインストール](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/sam-cli-requirements.html)
 ```
 sam local invoke "serverlessFunction" --event "./test/event/SoundsOfRainIntent.json"
 ```
 
-## ASK CLIのインストール
-- [ステップ2：ASK CLIのインストールと初期化](https://developer.amazon.com/ja/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html#step-2-install-and-initialize-ask-cli)
-```
-# Version確認
-ask -v
-```
-
 ## ASK CLIによるシミュレート
+- [ステップ2：ASK CLIのインストールと初期化](https://developer.amazon.com/ja/docs/smapi/quick-start-alexa-skills-kit-command-line-interface.html#step-2-install-and-initialize-ask-cli)
 - [[Alexa] 遂にでた！ Alexa Skill Kit のCLIでデプロイまでやってみた](https://dev.classmethod.jp/cloud/ask-cli/)
 ```
 #初期化(※profileはxbloodを指定←awsとはまた別)
 ask init
+
 #シミュレートの実行(LaunchRequest)
 ask simulate --text "さみだれのおとを開いて" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID} --profile xblood
+
 #シミュレートの実行(SoundOfRainIntent)
 ask simulate --text "リラックスしたい" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID} --profile xblood
 ```
@@ -106,6 +97,15 @@ ask simulate --text "リラックスしたい" --locale ja-JP --skill-id ${ALEXA
 | prod | (手動による指定) | Production environment |
 
 リリース(公開・再公開)する時のエンドポイントはエイリアスを指定すること
+
+## デプロイコマンド
+内容はデプロイシェル参照のこと
+```
+sh ./deploy.sh
+```
+
+## 参考サイト
+- [参考サイト一覧](./docs/reference.md)
 
 ## S3バケットのスタック作成(1度きりの作業)
 ```
@@ -131,11 +131,3 @@ aws cloudformation delete-stack \
   --stack-name alexa-sounds-of-rain-s3-buckets \
   --profile xblood
 ```
-## デプロイ
-内容はデプロイシェル参照のこと
-```
-sh ./deploy.sh
-```
-
-## 参考サイト
-- [参考サイト一覧](./docs/reference.md)
