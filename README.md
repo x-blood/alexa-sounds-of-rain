@@ -74,10 +74,10 @@ sam local invoke "serverlessFunction" --event "./test/event/SoundsOfRainIntent.j
 ask init
 
 #シミュレートの実行(LaunchRequest)
-ask simulate --text "さみだれのおとを開いて" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID} --profile xblood
+ask simulate --text "さみだれのおとを開いて" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID}
 
 #シミュレートの実行(SoundOfRainIntent)
-ask simulate --text "リラックスしたい" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID} --profile xblood
+ask simulate --text "リラックスしたい" --locale ja-JP --skill-id ${ALEXA_SOUNDS_OF_RAIN_APP_ID}
 ```
 
 ## 使用する環境変数
@@ -103,6 +103,15 @@ ask simulate --text "リラックスしたい" --locale ja-JP --skill-id ${ALEXA
 ```
 sh ./deploy.sh
 ```
+
+## **本番環境デプロイ手順**
+1. 環境変数 `ALEXA_SOUNDS_OF_RAIN_STAGE` に `prod` を指定する
+1. `sh ./deploy.sh` コマンドを実行し、LambdaファンクションをAWSにデプロイする
+1. マネージメントコンソールから手動でLambdaファンクションに `Version` を作成する
+1. 既存エイリアス名 `prod` を `削除` する
+1. 既存エイリアス名 `prod` を `再作成` する。この時、作成した `Version` を指定すること
+1. エイリアス `prod` のトリガーに `Alexa Skills Kit`を設定する。スキルIDを入力すること
+1. テストコンソールおよび実機で動作確認する
 
 ## 参考サイト
 - [参考サイト一覧](./docs/reference.md)
