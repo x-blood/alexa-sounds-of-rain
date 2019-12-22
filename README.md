@@ -15,7 +15,7 @@ source ~/.nvm/nvm.sh
 nvm --version
 
 # Node.jsのインストール
-nvm install 6.14.1
+nvm install 10.18.0
 
 # Node.jsのバージョン確認
 node -v
@@ -24,7 +24,7 @@ node -v
 ### 推奨：nvmの設定(Linux & Mac)
 ```
 # デフォルトのNode.jsのバージョン指定
-nvm alias default v6.14.1
+nvm alias default v10.18.0
 
 # ターミナル起動時の指定
 ## Linuxの場合

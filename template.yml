@@ -21,7 +21,7 @@ Resources:
       FunctionName: alexa-sounds-of-rain
       CodeUri: src/handlers
       Handler: index.handler
-      Runtime: nodejs8.10
+      Runtime: nodejs10.x
       Timeout: 60
       Environment:
         Variables:
